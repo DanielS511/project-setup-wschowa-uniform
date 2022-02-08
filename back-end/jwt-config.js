@@ -15,7 +15,7 @@ const jwtStrategy = new JwtStrategy(jwtOptions, async function (
 	jwt_payload,
 	next
 ) {
-	// console.log("JWT payload received", jwt_payload) // debugging
+	console.log("JWT payload received", jwt_payload) // debugging
 
 	const user = await User.findById(jwt_payload.id)
 	if (user) {
