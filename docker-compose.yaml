@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  back-end:
+    build: ./back-end
+    container_name: back-end
+    networks:
+      - app-net
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./back-end:/app
+      - /app/node_modules
+      - /app/.nyc_output
+    env_file:
+      - ./back-end/.env
+
+  front-end:
+    build: ./front-end
+    container_name: front-end
+    networks:
+      - app-net
+    ports:
+      - "3000:3000"
+    depends_on:
+      - back-end
+    stdin_open: true
+    tty: true
+
+networks:
+  app-net:
